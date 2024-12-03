@@ -1,4 +1,6 @@
+import 'package:barbershop/controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,15 +12,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    Get.put(BarbershopController()); // Initialize controller
+    return MaterialApp(
       home: BarbershopAppHome(),
     );
   }
 }
 
-
 class BarbershopAppHome extends StatelessWidget {
-  const BarbershopAppHome({super.key});
+  BarbershopAppHome({super.key});
+
+  final BarbershopController barbershopController =
+      Get.put(BarbershopController());
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +33,8 @@ class BarbershopAppHome extends StatelessWidget {
           child: SingleChildScrollView(
             padding: EdgeInsets.all(20),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start, // Aligns children to the start of the column
+              crossAxisAlignment: CrossAxisAlignment
+                  .start, // Aligns children to the start of the column
               children: [
                 TopBar(),
                 SizedBox(height: 20),
@@ -37,25 +43,25 @@ class BarbershopAppHome extends StatelessWidget {
                 SearchInput(),
                 SizedBox(height: 10),
                 Text(
-                'Nearest Babershop',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+                  'Nearest Babershop',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              SizedBox(height: 10),
-              NearestBarbershopsList(),
-              Text(
-                'Most recommended',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+                SizedBox(height: 10),
+                NearestBarbershopsList(),
+                Text(
+                  'Most recommended',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              SizedBox(height: 10),
-              MostRecommendedBarbershop(),
-              SizedBox(height: 10),
-              NearestBarbershopsList()
+                SizedBox(height: 10),
+                MostRecommendedBarbershop(),
+                SizedBox(height: 10),
+                NearestBarbershopsList()
               ],
             ),
           ),
@@ -112,14 +118,16 @@ class TopBar extends StatelessWidget {
               BoxShadow(
                 offset: const Offset(0, 5),
                 blurRadius: 10,
-                color: Colors.grey.withOpacity(0.3), // Slight shadow for profile picture
+                color: Colors.grey
+                    .withOpacity(0.3), // Slight shadow for profile picture
               ),
             ],
             shape: BoxShape.circle,
           ),
           child: const CircleAvatar(
             radius: 25, // Size of the profile picture
-            backgroundImage: AssetImage("lib/assets/profile_pic.png"), // Replace with the correct asset path
+            backgroundImage: AssetImage(
+                "lib/assets/profile_pic.png"), // Replace with the correct asset path
           ),
         ),
       ],
@@ -167,8 +175,10 @@ class SearchInput extends StatelessWidget {
               padding: const EdgeInsets.only(right: 8.0),
               child: Container(
                 decoration: BoxDecoration(
-                  color: const Color(0xFF433A93), // Darker background for button
-                  borderRadius: BorderRadius.circular(15.0), // Slightly rounded corners for filter button
+                  color:
+                      const Color(0xFF433A93), // Darker background for button
+                  borderRadius: BorderRadius.circular(
+                      15.0), // Slightly rounded corners for filter button
                 ),
                 child: IconButton(
                   icon: const Icon(Icons.tune),
@@ -191,66 +201,72 @@ class PromoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 25.0),
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        height: 200, // Adjusted height based on design
-        decoration: BoxDecoration(
-          color: const Color(0xFFFFA726), // Orange background color
-          borderRadius: BorderRadius.circular(15),
-        ),
-        child: Stack(
-          children: [
-            // Top left logo
-            Positioned(
-              top: 10,
-              left: 10,
-              child: Image.asset(
-                'lib/assets/logo.png', // Replace with your logo asset path
-                width: 60, // Set width based on your logo's size
-              ),
-            ),
-            // 'Booking Now' button
-            Positioned(
-              bottom: 20,
-              left: 20,
-              child: ElevatedButton(
-                onPressed: () {
-                  // Handle button press
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF433A93), // Dark purple button color
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
+    return Obx(() {
+      final banner = Get.find<BarbershopController>().banner.value;
+      if (banner == null) return Container();
+      return Padding(
+        padding: const EdgeInsets.only(top: 25.0),
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          height: 200, // Adjusted height based on design
+          decoration: BoxDecoration(
+            color: const Color(0xFFFFA726), // Orange background color
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: Stack(
+            children: [
+              // Top left logo
+              Positioned(
+                top: 10,
+                left: 10,
+                child: Image.asset(
+                  'lib/assets/logo.png', // Replace with your logo asset path
+                  width: 60, // Set width based on your logo's size
                 ),
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                  child: Text(
-                    "Booking Now",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
+              ),
+              // 'Booking Now' button
+              Positioned(
+                bottom: 20,
+                left: 20,
+                child: ElevatedButton(
+                  onPressed: () {
+                    // Handle button press
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor:
+                        const Color(0xFF433A93), // Dark purple button color
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                    child: Text(
+                      banner.buttonTitle,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            // Barber image on the right
-            Positioned(
-              right: -100,
-              bottom: 0,
-              child: Image.asset(
-                'lib/assets/barber_image.png', // Replace with your barber image asset path
-                width: 300, // Adjust size of the barber image
+              // Barber image on the right
+              Positioned(
+                right: -100,
+                bottom: 0,
+                child: Image.network(
+                  banner.image, // Replace with your barber image asset path
+                  width: 300, // Adjust size of the barber image
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 }
 
@@ -384,7 +400,7 @@ class Card extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 15,right: 15),
+      padding: const EdgeInsets.only(bottom: 15, right: 15),
       child: Container(
         width: 150,
         height: 150,
@@ -437,6 +453,24 @@ class NearestBarbershopsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return Obx(() {
+      final nearestBarbershops = Get.find<BarbershopController>().nearestBarbershops;
+      return Column(
+        children: nearestBarbershops.map((barbershop) {
+          return Column(
+            children: [
+              BarbershopItem(
+                image: barbershop.image,
+                name: barbershop.name,
+                location: barbershop.locationWithDistance,
+                rating: barbershop.reviewRate,
+              ),
+              SizedBox(height: 10),
+            ],
+          );
+        }).toList(),
+      );
+    });
     return const Column(
       children: [
         BarbershopItem(
@@ -486,11 +520,12 @@ class BarbershopItem extends StatelessWidget {
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(10),
-          child: Image.asset(
+          child: Image.network(
             image,
             width: 80,
             height: 80,
             fit: BoxFit.cover,
+            errorBuilder: (context, error, stackTrace) => Icon(Icons.error),
           ),
         ),
         SizedBox(width: 10),
@@ -605,7 +640,8 @@ class MostRecommendedBarbershop extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     ),
                   ),
                 ),

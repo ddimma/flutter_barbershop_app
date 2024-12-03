@@ -1,0 +1,58 @@
+{
+  "banner": {
+    "image": "https://i.postimg.cc/mtZz9xRC/barber-image.png",
+    "button_title": "Booking now"
+  },
+  "nearest_barbershop": [
+    {
+      "name": "Barbershop 1",
+      "location_with_distance": "Area 1 (1.1 km)",
+      "image": "https://i.postimg.cc/zycJ36Xz/1.png",
+      "review_rate": 4.1
+    },
+    {
+      "name": "Barbershop 2",
+      "location_with_distance": "Area 2 (1.2 km)",
+      "image": "https://i.postimg.cc/rKqyH5Pk/2.png",
+      "review_rate": 4.2
+    },
+    {
+      "name": "Barbershop 3",
+      "location_with_distance": "Area 3 (1.3 km)",
+      "image": "https://i.postimg.cc/TpQ2vhzW/3.png",
+      "review_rate": 4.3
+    },
+    {
+      "name": "Barbershop 4",
+      "location_with_distance": "Area 4 (1.4 km)",
+      "image": "https://i.postimg.cc/K3DGzY4w/most-recommended-barber.png",
+      "review_rate": 4.4
+    }
+  ],
+  "list": [
+    {
+      "name": "Master Piece Barbershop - Haircut Styling",
+      "location_with_distance": "Banguntapan (5 km)",
+      "image": "https://i.postimg.cc/zycJ36Xz/1.png",
+      "review_rate": 4.9
+    },
+    {
+      "name": "Sharp Edge Barbers - Grooming Services",
+      "location_with_distance": "Downtown (4 km)",
+      "image": "https://i.postimg.cc/rKqyH5Pk/2.png",
+      "review_rate": 4.8
+    },
+    {
+      "name": "Gentlemen's Cut & Style",
+      "location_with_distance": "Old Town (3.5 km)",
+      "image": "https://i.postimg.cc/TpQ2vhzW/3.png",
+      "review_rate": 4.7
+    },
+    {
+      "name": "Classic Trim Barbershop",
+      "location_with_distance": "West End (6 km)",
+      "image": "https://i.postimg.cc/K3DGzY4w/most-recommended-barber.png",
+      "review_rate": 4.6
+    }
+  ]
+}
